@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tweet {
+  id          Int      @id @default(autoincrement())  
+  createdAt   DateTime @default(now()) 
+  updatedAt   DateTime @updatedAt
+  text String
+  postedBy    User?    @relation(name: "PostedBy", fields: [postedById], references: [id])
+  postedById  Int?
+  comments    Comment[]
+  votes       Vote[]    @relation(name: "Votes") 
+  retweets    Retweet[] @relation(name: "Retweets") 
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  tweets    Tweet[]  @relation(name: "PostedBy")
+  votes     Vote[]
+  retweets   Retweet[]
+  comments   Comment[]
+  profile    Profile?
+  followedBy User[]  @relation("UserFollows")
+  following  User[]  @relation("UserFollows")
+ 
+  createdAt   DateTime @default(now()) 
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  bio       String?
+  location  String?
+  website   String?
+  avatar    String?
+  userId    Int?     @unique
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  body        String
+  tweet       Tweet   @relation(fields: [tweetId], references: [id])
+  tweetId     Int
+  postedBy    User? @relation(fields: [postedById], references: [id])
+  postedById  Int?
+  commentId   Int?
+  comment     Comment?  @relation("CommentToComment", fields: [commentId], references: [id])
+  comments    Comment[] @relation("CommentToComment")
+
+  createdAt   DateTime @default(now()) 
+}
+
+model Vote {
+  id        Int      @id @default(autoincrement())
+  tweet     Tweet    @relation(name: "Votes" ,fields: [tweetId], references: [id])
+  tweetId   Int
+  user      User? @relation(fields: [userId], references: [id])
+  userId    Int
+
+  @@unique([tweetId, userId])
+  createdAt   DateTime @default(now()) 
+}
+
+model Retweet {
+  id        Int      @id @default(autoincrement())
+  tweet     Tweet    @relation(name: "Retweets" ,fields: [tweetId], references: [id])
+  tweetId   Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId Int
+
+  @@unique([tweetId, userId])
+  createdAt   DateTime @default(now()) 
+}

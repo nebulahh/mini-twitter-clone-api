@@ -1,0 +1,41 @@
+{
+  "name": "server4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development ts-node-dev --exit-child --respawn src/main.ts",
+    "start": "ts-node src/main.ts",
+    "lint": "eslint . --ext .ts",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@prisma/client": "4.13.0",
+    "@types/express-session": "^1.17.7",
+    "@types/jsonwebtoken": "9.0.2",
+    "@types/node": "18.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "cross-env": "7.0.3",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "prisma": "4.13.0",
+    "ts-node": "10.9.1",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.0.4"
+  },
+  "dependencies": {
+    "@graphql-tools/schema": "^9.0.19",
+    "argon2": "^0.30.3",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "graphql-scalars": "^1.21.3",
+    "graphql-yoga": "3.9.1",
+    "jsonwebtoken": "9.0.0"
+  }
+}
