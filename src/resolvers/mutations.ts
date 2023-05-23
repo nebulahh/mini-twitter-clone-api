@@ -4,7 +4,6 @@ import { APP_SECRET } from '../auth';
 import { GraphQLContext } from '../context';
 import { hash, verify } from 'argon2';
 import { sign } from 'jsonwebtoken';
-import { ID } from 'filecoin.js/builds/dist/providers/Types';
 
 export const Mutation = {
   async createProfile(
@@ -327,7 +326,7 @@ export const Mutation = {
   async followUser(
     parent: unknown,
     args: {
-      followId: ID;
+      followId: string;
     },
     context: GraphQLContext
   ) {
@@ -373,7 +372,7 @@ export const Mutation = {
   async unFollowUser(
     parent: unknown,
     args: {
-      followId: ID;
+      followId: string;
     },
     context: GraphQLContext
   ) {
