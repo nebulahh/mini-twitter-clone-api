@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev --exit-child --respawn src/main.ts",
-    "start": "ts-node src/main.ts",
-    "build": "tsc",
+    "startTS": "ts-node src/main.ts",
     "lint": "eslint . --ext .ts",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "migrate:deploy": "prisma migrate deploy",
+    "generate": "ts-node --transpile-only src/schema",
+    "build": "prisma generate && npm run generate && tsc",
+    "start": "node dist/src/index.js"
   },
   "keywords": [],
   "author": "",

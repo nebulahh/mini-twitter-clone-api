@@ -197,6 +197,7 @@ export const Mutation = {
     if (!valid) {
       throw new Error('Invalid password');
     }
+    console.log(user);
     // context.initialContext.request.
     const token = sign({ userId: user.id }, APP_SECRET);
     return { token, user };
