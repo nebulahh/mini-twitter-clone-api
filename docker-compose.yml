@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: graphqlServer4
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: master
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  backend:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - 4000:4000
+      - 9229:9229
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run startDev
+    environment:
+      DATABASE_URL: postgresql://postgres@postgres/graphqlServer4
+      PORT: 4000

@@ -9,9 +9,9 @@ dotenv.config();
 function main() {
   const yoga = createYoga({ schema, context: createContext });
   const server = createServer(yoga);
-
-  server.listen(process.env.PORT || 4000, () => {
-    console.info('Server is running on http://localhost:4000/graphql');
+  const PORT = process.env.PORT || 4000;
+  server.listen(PORT, () => {
+    console.info(`Server is running on http://localhost:${PORT}/graphql`);
   });
 }
 

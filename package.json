@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev --exit-child --respawn src/main.ts",
-    "startTS": "ts-node src/main.ts",
+    "startDev": "tsc && node --inspect=0.0.0.0 build/main.js",
     "lint": "eslint . --ext .ts",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "migrate:deploy": "prisma migrate deploy",
