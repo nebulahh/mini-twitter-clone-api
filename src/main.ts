@@ -16,7 +16,7 @@ function main() {
   const PORT = process.env.PORT || 5000;
   server.listen(PORT, () => {
     console.info(
-      `Server is running on http://localhost:${PORT}/api${yoga.graphqlEndpoint}`
+      `Server is running on : http://localhost:${PORT}/api${yoga.graphqlEndpoint}`
     );
   });
 }

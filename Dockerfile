@@ -16,4 +16,4 @@ RUN npm run build
 RUN npm run migrate:deploy
 
 EXPOSE 4000
-CMD ["npm","start"]
+CMD ["npm", "start"]

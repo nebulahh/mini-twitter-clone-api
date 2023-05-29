@@ -5,21 +5,27 @@ services:
       - 5432:5432
     environment:
       POSTGRES_DB: graphqlServer4
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: master
+      POSTGRES_USER: ${PG_USERNAME}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_HOST_AUTH_METHOD: trust
-
+    volumes:
+      - pg_data:/var/lib/postgresql/data
   backend:
     build: .
     depends_on:
       - postgres
+    env_file:
+      - .env
     ports:
       - 4000:4000
       - 9229:9229
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: npm run startDev
+    command: ['npm', 'run', 'start']
     environment:
       DATABASE_URL: postgresql://postgres@postgres/graphqlServer4
+      JWT_SECRET: ${JWT_SECRET}
       PORT: 4000
+volumes:
+  pg_data:
