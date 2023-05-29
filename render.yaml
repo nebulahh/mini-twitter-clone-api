@@ -1,0 +1,15 @@
+services:
+  - type: web
+    env: node
+    name: mt-prod-backend1
+    repo: https://github.com/nebulahh/mini-twitter-clone-api.git
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mini-twitter-db
+          property: connectionString
+
+database:
+  - name: mini-twitter-db
