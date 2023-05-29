@@ -11,7 +11,9 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     depends_on:
       - postgres
     env_file:
