@@ -11,5 +11,5 @@ services:
           name: mini-twitter-db
           property: connectionString
 
-database:
+databases:
   - name: mini-twitter-db
