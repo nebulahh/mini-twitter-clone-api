@@ -2,6 +2,7 @@ services:
   - type: web
     env: node
     name: mt-prod-backend1
+    plan: free
     repo: https://github.com/nebulahh/mini-twitter-clone-api.git
     buildCommand: npm install && npm run build
     startCommand: npm run start
